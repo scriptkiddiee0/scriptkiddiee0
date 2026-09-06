@@ -1,55 +1,38 @@
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,100:bf5af2&height=180&section=header&text=scriptkiddiee0&fontSize=45&fontColor=bf5af2&fontAlignY=35&animation=fadeIn&desc=AI%20%2B%20Cybersecurity%20Student&descAlignY=55&descSize=18&descColor=c9d1d9" width="100%"/>
+# scriptkiddiee0
 
-<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&pause=1000&color=bf5af2&center=true&vCenter=true&width=520&lines=Learning+%E2%80%A2+Building+%E2%80%A2+Breaking+%E2%80%A2+Understanding;Still+wearing+the+beginner+label." alt="Typing SVG" />
+### AI + Cybersecurity Student — Learning • Building • Breaking • Understanding
 
-[![Portfolio](https://img.shields.io/badge/PORTFOLIO-000000?style=for-the-badge&logo=todoist&logoColor=white)](#)
-[![Email](https://img.shields.io/badge/EMAIL-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:you@example.com)
-[![Hack The Box](https://img.shields.io/badge/HACK_THE_BOX-9FEF00?style=for-the-badge&logo=hackthebox&logoColor=black)](#)
-[![TryHackMe](https://img.shields.io/badge/TRYHACKME-C11F1F?style=for-the-badge&logo=tryhackme&logoColor=white)](#)
-[![GitHub](https://img.shields.io/badge/GITHUB-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/scriptkiddiee0)
+<img src="https://readme-typing-svg.demolab.com/?lines=BS+Cybersecurity+%40+UET+Lahore;Learning+Python+%E2%86%92+AI+%E2%86%92+Offensive+Security;Currently+grinding+on+HackTheBox+%26+TryHackMe;Still+learning.+Still+building.+Still+breaking+things.&font=Fira%20Code&center=true&width=600&height=40&color=A855F7&vCenter=true&size=22&pause=1500&background=00000000" alt="Typing SVG" />
 
-![Profile Views](https://komarev.com/ghpvc/?username=scriptkiddiee0&color=bf5af2&style=flat-square&label=profile+views)
+<br/>
+
+[![Portfolio](https://img.shields.io/badge/Portfolio-Repo-1a1a1a?style=for-the-badge&logo=github&logoColor=white)](#)
+[![Status](https://img.shields.io/badge/Status-Actively%20Learning-1a1a1a?style=for-the-badge)](#)
+[![License](https://img.shields.io/badge/License-MIT-1a1a1a?style=for-the-badge)](#)
 
 </div>
 
-<br>
-
 ---
 
-### `~/ whoami`
+## About Me
 
-```
-$ cat about.txt
-```
+I'm a **BS Cybersecurity student at UET Lahore**, coming from a **non-technical background** and building my way — from first line of Python to offensive security — one project at a time.
 
-I'm a BS Cybersecurity student at UET Lahore, coming from a non-technical background and
-building my way — from first line of Python to offensive security — one project at a time.
+This repository is my **public learning log**: real projects, real mistakes, real progress. Nothing here is staged to look perfect. It's staged to show growth.
 
-This repo is my public learning log: real projects, real mistakes, real progress.
-Nothing here is staged to look perfect. It's staged to show growth.
-
-- Currently building **ThreatLens** — an OSINT threat-intel dashboard
-- Practicing on **Hack The Box** and **TryHackMe**
-- Learning networking fundamentals + Linux internals
-- Fun fact: AI helps me move faster, understanding helps me move forward
-
----
-
-### `~/ path`
-
-```
+```text
 Non-Tech Background
         │
         ▼
-   Learn the Basics        (Python)
+   Learn the Basics  (Python)
         │
         ▼
      Build Projects
         │
         ▼
-   Break Things             (Labs, CTFs, HTB/THM)
+   Break Things       (Labs, CTFs, HTB/THM)
         │
         ▼
    Understand Why
@@ -61,54 +44,100 @@ Non-Tech Background
    Build Something Better
 ```
 
+> AI helps me move faster. Understanding helps me move forward.
+
 ---
 
-### `~/ toolbox`
+## Tech Stack & Tools
 
 <div align="center">
 
-[![My Skills](https://skillicons.dev/icons?i=python,bash,linux,kali,git,github,vscode&theme=dark)](https://skillicons.dev)
+<img src="https://img.shields.io/badge/Python-000000?style=for-the-badge&logo=python&logoColor=white"/>
+<img src="https://img.shields.io/badge/Kali_Linux-000000?style=for-the-badge&logo=kalilinux&logoColor=white"/>
+<img src="https://img.shields.io/badge/Burp_Suite-000000?style=for-the-badge&logo=burpsuite&logoColor=white"/>
+<img src="https://img.shields.io/badge/Bash%2FCLI-000000?style=for-the-badge&logo=gnubash&logoColor=white"/>
+<img src="https://img.shields.io/badge/VS_Code-000000?style=for-the-badge&logo=visualstudiocode&logoColor=white"/>
+<br/>
+<img src="https://img.shields.io/badge/Hack_The_Box-000000?style=for-the-badge&logo=hackthebox&logoColor=white"/>
+<img src="https://img.shields.io/badge/TryHackMe-000000?style=for-the-badge&logo=tryhackme&logoColor=white"/>
+<img src="https://img.shields.io/badge/Git-000000?style=for-the-badge&logo=git&logoColor=white"/>
+<img src="https://img.shields.io/badge/GitHub-000000?style=for-the-badge&logo=github&logoColor=white"/>
+<img src="https://img.shields.io/badge/Linux-000000?style=for-the-badge&logo=linux&logoColor=white"/>
 
 </div>
 
-<br>
+<br/>
 
 | Category | Tools |
 |---|---|
-| **Languages** | Python (strongest), Bash |
-| **Environment** | Kali Linux, Linux CLI |
-| **Web / AppSec** | Burp Suite |
-| **Practice Labs** | Hack The Box, TryHackMe |
-| **Dev Tools** | VS Code, Git & GitHub |
-| **AI** | LLMs, RAG, AI-assisted development |
+| Languages | Python (strongest), Bash |
+| Environment | Kali Linux, Linux CLI |
+| Web / AppSec | Burp Suite |
+| Practice Labs | Hack The Box, TryHackMe |
+| Dev Tools | VS Code, Git & GitHub |
+| AI | LLMs, RAG, AI-assisted development |
 
 ---
 
-### `~/ featured projects`
+## Featured Projects
+
+> Projects I'm actively building or proud of. Updated as I go.
 
 | Project | Description | Tech |
 |---|---|---|
-| **ThreatLens** | OSINT threat-intel dashboard pulling live IOCs from ThreatFox (abuse.ch) with search, filtering, and visualizations | `Python` `Streamlit` `Pandas` `Plotly` |
-| Coming Soon | More projects being built... | `Python` |
-| Coming Soon | AI experiments & applications | `AI` |
-| Coming Soon | Offensive security / CTF write-ups | `Security` |
+| `ThreatLens` | An OSINT threat-intel dashboard pulling live IOCs from ThreatFox (abuse.ch) with search, filtering, and visualizations | `Python` `Streamlit` `Pandas` `Plotly` |
+| *Coming Soon* | More projects being built... | `Python` |
+| *Coming Soon* | AI experiments & applications | `AI` |
+| *Coming Soon* | Offensive security / CTF write-ups | `Security` |
 
 ---
 
-### `~/ current progress`
+## Project Categories
 
-```
+<table>
+<tr>
+<td width="33%" valign="top">
+
+### Python
+Programs, automation scripts, and tools built while strengthening core programming fundamentals.
+
+</td>
+<td width="33%" valign="top">
+
+### AI
+Projects involving LLMs, RAG pipelines, AI-assisted apps, and experimentation.
+
+</td>
+<td width="33%" valign="top">
+
+### Cybersecurity
+Labs, write-ups, and tooling built while learning offensive & defensive security — from HTB/THM boxes to custom scripts.
+
+</td>
+</tr>
+</table>
+
+---
+
+## Current Progress
+
+```text
 Python           ████████░░  80%
-Cybersecurity    ███░░░░░░░  30%
-AI / LLMs        ███░░░░░░░  30%
-Offensive Sec    ██░░░░░░░░  20%
-Projects Shipped ███░░░░░░░  30%
+Cybersecurity     ███░░░░░░░  30%
+AI / LLMs         ███░░░░░░░  30%
+Offensive Sec     ██░░░░░░░░  20%
+Projects Shipped  ███░░░░░░░  30%
 ```
-*These bars aren't a certification — they're a mirror. Updated honestly, not for show.*
+
+> These bars aren't a certification — they're a mirror. Updated honestly, not for show.
 
 ---
 
-### `~/ roadmap`
+## Roadmap
+
+<table>
+<tr>
+<td valign="top" width="50%">
 
 **Done**
 - [x] Start BS Cybersecurity @ UET Lahore
@@ -118,6 +147,9 @@ Projects Shipped ███░░░░░░░  30%
 - [x] Start solving HTB / THM machines
 - [x] Explore Burp Suite for web app testing
 
+</td>
+<td valign="top" width="50%">
+
 **In Progress / Next**
 - [ ] Build more substantial Python projects
 - [ ] Go deeper on networking fundamentals
@@ -126,38 +158,35 @@ Projects Shipped ███░░░░░░░  30%
 - [ ] Document CTF/lab write-ups properly
 - [ ] Start contributing to open-source security tools
 
----
+</td>
+</tr>
+</table>
 
-### `~/ the numbers`
-
-<div align="center">
-
-<img src="https://github-readme-stats.vercel.app/api?username=scriptkiddiee0&show_icons=true&theme=github_dark&hide_border=true&count_private=true&title_color=bf5af2&icon_color=bf5af2&text_color=c9d1d9&bg_color=0d1117" width="48%" />
-<img src="https://github-readme-streak-stats.herokuapp.com/?user=scriptkiddiee0&theme=github-dark-blue&hide_border=true&background=0d1117&ring=bf5af2&fire=bf5af2&currStreakLabel=bf5af2" width="48%" />
-
-<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=scriptkiddiee0&layout=compact&theme=github_dark&hide_border=true&title_color=bf5af2&text_color=c9d1d9&bg_color=0d1117" width="48%" />
-
-<img src="https://github-readme-activity-graph.vercel.app/graph?username=scriptkiddiee0&theme=github-compact&hide_border=true&bg_color=0d1117&color=bf5af2&line=bf5af2&point=ffffff" width="90%" />
-
-</div>
-
----
-
-### `~/ contribution skyline (3D)`
-
-<div align="center">
-
-<img src="https://raw.githubusercontent.com/scriptkiddiee0/scriptkiddiee0/main/profile-3d-contrib/profile-night-rainbow.svg" width="90%" alt="3D contribution graph"/>
-
-</div>
-
-> This 3D isometric graph is generated automatically by a GitHub Action (included in this repo
-> as `.github/workflows/3d-contrib.yml`). It runs daily and commits an updated SVG to a
-> `profile-3d-contrib/` folder — once it runs the first time, the graph above will render.
+```text
+Python
+  │
+  ▼
+Computer Science Fundamentals
+  │
+  ▼
+Networking + Linux Internals
+  │
+  ▼
+AI + Automation
+  │
+  ▼
+Offensive Security (HTB / THM)
+  │
+  ▼
+Web App Security (Burp Suite)
+  │
+  ▼
+Real-World Security Projects
+```
 
 ---
 
-### `~/ AI-assisted learning`
+## AI-Assisted Learning
 
 AI is part of how I learn — not a replacement for learning.
 
@@ -166,28 +195,47 @@ I use it to:
 - Debug and troubleshoot broken code
 - Compare different approaches before committing to one
 - Brainstorm project ideas
-- Get unstuck without losing the thread of why something works
+- Get unstuck without losing the thread of *why* something works
 
-The goal isn't to generate code. The goal is to understand it.
+> The goal isn't to generate code. The goal is to understand it.
 
 ---
 
-### `~/ why scriptkiddiee0`
-
-The name's a little self-aware on purpose.
-
-There's a real difference between running someone else's tool and understanding what that
-tool is actually doing under the hood. I know I'm early in that journey — so instead of
-hiding the "beginner" label, I'm wearing it while I close the gap.
-
-Everyone starts somewhere. This is where I started — and where I keep going.
+## GitHub Stats
 
 <div align="center">
 
-Still learning. Still building. Still breaking things — on purpose, this time.
+<img src="https://github-readme-stats.vercel.app/api?username=scriptkiddiee0&show_icons=true&theme=dark&hide_border=true&count_private=true" width="49%" />
+<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=scriptkiddiee0&layout=compact&theme=dark&hide_border=true" width="35%" />
 
-⭐ *If something here is useful, a star helps more than you'd think.*
+<br/>
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:bf5af2,100:0d1117&height=100&section=footer" width="100%"/>
+<img src="https://github-readme-streak-stats.herokuapp.com/?user=scriptkiddiee0&theme=dark&hide_border=true" width="60%"/>
+
+</div>
+
+---
+
+## Why `scriptkiddiee0`?
+
+The name's a little self-aware on purpose.
+
+There's a real difference between running someone else's tool and understanding what that tool is actually doing under the hood. I know I'm early in that journey — so instead of hiding the "beginner" label, I'm wearing it while I close the gap.
+
+**Everyone starts somewhere. This is where I started — and where I keep going.**
+
+---
+
+<div align="center">
+
+### Follow the journey
+
+Interested in cybersecurity, Python, or watching someone build skills from zero? You're welcome here.
+
+**This repository grows as I grow.**
+
+*Still learning. Still building. Still breaking things — on purpose, this time.*
+
+If something here is useful, a star helps more than you'd think.
 
 </div>
