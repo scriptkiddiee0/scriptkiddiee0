@@ -1,8 +1,8 @@
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,100:00ff00&height=180&section=header&text=scriptkiddiee0&fontSize=45&fontColor=00ff00&fontAlignY=35&animation=fadeIn&desc=AI%20%2B%20Cybersecurity%20Student&descAlignY=55&descSize=18&descColor=c9d1d9" width="100%"/>
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,100:bf5af2&height=180&section=header&text=scriptkiddiee0&fontSize=45&fontColor=bf5af2&fontAlignY=35&animation=fadeIn&desc=AI%20%2B%20Cybersecurity%20Student&descAlignY=55&descSize=18&descColor=c9d1d9" width="100%"/>
 
-<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&pause=1000&color=00FF00&center=true&vCenter=true&width=520&lines=Learning+%E2%80%A2+Building+%E2%80%A2+Breaking+%E2%80%A2+Understanding;Still+wearing+the+beginner+label." alt="Typing SVG" />
+<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&pause=1000&color=bf5af2&center=true&vCenter=true&width=520&lines=Learning+%E2%80%A2+Building+%E2%80%A2+Breaking+%E2%80%A2+Understanding;Still+wearing+the+beginner+label." alt="Typing SVG" />
 
 [![Portfolio](https://img.shields.io/badge/PORTFOLIO-000000?style=for-the-badge&logo=todoist&logoColor=white)](#)
 [![Email](https://img.shields.io/badge/EMAIL-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:you@example.com)
@@ -10,7 +10,7 @@
 [![TryHackMe](https://img.shields.io/badge/TRYHACKME-C11F1F?style=for-the-badge&logo=tryhackme&logoColor=white)](#)
 [![GitHub](https://img.shields.io/badge/GITHUB-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/scriptkiddiee0)
 
-![Profile Views](https://komarev.com/ghpvc/?username=scriptkiddiee0&color=00ff00&style=flat-square&label=profile+views)
+![Profile Views](https://komarev.com/ghpvc/?username=scriptkiddiee0&color=bf5af2&style=flat-square&label=profile+views)
 
 </div>
 
@@ -132,12 +132,12 @@ Projects Shipped ███░░░░░░░  30%
 
 <div align="center">
 
-<img src="https://github-readme-stats.vercel.app/api?username=scriptkiddiee0&show_icons=true&theme=github_dark&hide_border=true&count_private=true&title_color=00ff00&icon_color=00ff00&text_color=c9d1d9&bg_color=0d1117" width="48%" />
-<img src="https://github-readme-streak-stats.herokuapp.com/?user=scriptkiddiee0&theme=github-dark-blue&hide_border=true&background=0d1117&ring=00ff00&fire=00ff00&currStreakLabel=00ff00" width="48%" />
+<img src="https://github-readme-stats.vercel.app/api?username=scriptkiddiee0&show_icons=true&theme=github_dark&hide_border=true&count_private=true&title_color=bf5af2&icon_color=bf5af2&text_color=c9d1d9&bg_color=0d1117" width="48%" />
+<img src="https://github-readme-streak-stats.herokuapp.com/?user=scriptkiddiee0&theme=github-dark-blue&hide_border=true&background=0d1117&ring=bf5af2&fire=bf5af2&currStreakLabel=bf5af2" width="48%" />
 
-<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=scriptkiddiee0&layout=compact&theme=github_dark&hide_border=true&title_color=00ff00&text_color=c9d1d9&bg_color=0d1117" width="48%" />
+<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=scriptkiddiee0&layout=compact&theme=github_dark&hide_border=true&title_color=bf5af2&text_color=c9d1d9&bg_color=0d1117" width="48%" />
 
-<img src="https://github-readme-activity-graph.vercel.app/graph?username=scriptkiddiee0&theme=github-compact&hide_border=true&bg_color=0d1117&color=00ff00&line=00ff00&point=ffffff" width="90%" />
+<img src="https://github-readme-activity-graph.vercel.app/graph?username=scriptkiddiee0&theme=github-compact&hide_border=true&bg_color=0d1117&color=bf5af2&line=bf5af2&point=ffffff" width="90%" />
 
 </div>
 
@@ -147,7 +147,7 @@ Projects Shipped ███░░░░░░░  30%
 
 <div align="center">
 
-<img src="https://raw.githubusercontent.com/scriptkiddiee0/scriptkiddiee0/main/profile-3d-contrib/profile-night-green.svg" width="90%" alt="3D contribution graph"/>
+<img src="https://raw.githubusercontent.com/scriptkiddiee0/scriptkiddiee0/main/profile-3d-contrib/profile-night-rainbow.svg" width="90%" alt="3D contribution graph"/>
 
 </div>
 
@@ -188,6 +188,6 @@ Still learning. Still building. Still breaking things — on purpose, this time.
 
 ⭐ *If something here is useful, a star helps more than you'd think.*
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:00ff00,100:0d1117&height=100&section=footer" width="100%"/>
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:bf5af2,100:0d1117&height=100&section=footer" width="100%"/>
 
 </div>
