@@ -2,7 +2,7 @@
 
    <img src="banner.svg" width="100%"/>
 
-<img src="https://readme-typing-svg.demolab.com/?lines=BS+Cybersecurity+%40+UET+Lahore;Learning+Python+%E2%86%92+AI+%E2%86%92+Offensive+Security;Currently+grinding+on+HackTheBox+%26+TryHackMe;Still+learning.+Still+building.+Still+breaking+things.&font=Fira%20Code&center=true&width=650&height=45&color=C084FC&vCenter=true&size=22&pause=1500&background=00000000" alt="Typing SVG" />
+<img src="https://readme-typing-svg.demolab.com/?lines=BS+Cybersecurity+%40+UET+Lahore;Learning+Python+%E2%86%92+AI+%E2%86%92+Offensive+Security;Currently+grinding+on+HackTheBox+%26+TryHackMe;Still+learning.+Still+building.&font=Fira%20Code&center=true&width=650&height=45&color=C084FC&vCenter=true&size=22&pause=1500&background=00000000" alt="Typing SVG" />
 
 <br/>
 
