@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=200&section=header&text=scriptkiddiee0&fontSize=55&fontColor=ffffff&animation=fadeIn&fontAlignY=35&desc=AI%20%2B%20Cybersecurity%20Student&descAlignY=55&descSize=18" width="100%"/>
+<img src="assets/banner.svg" width="100%"/>
 
 <img src="https://readme-typing-svg.demolab.com/?lines=BS+Cybersecurity+%40+UET+Lahore;Learning+Python+%E2%86%92+AI+%E2%86%92+Offensive+Security;Currently+grinding+on+HackTheBox+%26+TryHackMe;Still+learning.+Still+building.+Still+breaking+things.&font=Fira%20Code&center=true&width=650&height=45&color=C084FC&vCenter=true&size=22&pause=1500&background=00000000" alt="Typing SVG" />
 
@@ -14,7 +14,7 @@
 
 <br/>
 
-## 🧠 About Me
+##  About Me
 
 I'm a **BS Cybersecurity student at UET Lahore**, coming from a **non-technical background** and building my way — from first line of Python to offensive security — one project at a time.
 
@@ -46,11 +46,11 @@ Non-Tech Background
 
 </div>
 
-> 💜 *AI helps me move faster. Understanding helps me move forward.*
+>  *AI helps me move faster. Understanding helps me move forward.*
 
 <br/>
 
-## ⚡ Tech Stack & Tools
+##  Tech Stack & Tools
 
 <div align="center">
 
@@ -68,7 +68,7 @@ Non-Tech Background
 
 <div align="center">
 
-| 🗂️ Category | 🛠️ Tools |
+|  Category |  Tools |
 |:---|:---|
 | **Languages** | Python (strongest), Bash |
 | **Environment** | Kali Linux, Linux CLI |
@@ -81,7 +81,7 @@ Non-Tech Background
 
 <br/>
 
-## 🚀 Featured Projects
+##  Featured Projects
 
 > Projects I'm actively building or proud of. Updated as I go.
 
@@ -91,7 +91,7 @@ Non-Tech Background
 <tr>
 <td width="50%" valign="top">
 
-### 🔍 ThreatLens
+###  ThreatLens
 An OSINT threat-intel dashboard pulling live IOCs from ThreatFox (abuse.ch) with search, filtering, and visualizations.
 
 `Python` `Streamlit` `Pandas` `Plotly`
@@ -99,7 +99,7 @@ An OSINT threat-intel dashboard pulling live IOCs from ThreatFox (abuse.ch) with
 </td>
 <td width="50%" valign="top">
 
-### 🔨 Coming Soon
+###  Coming Soon
 More projects being built...
 
 `Python`
@@ -109,7 +109,7 @@ More projects being built...
 <tr>
 <td width="50%" valign="top">
 
-### 🤖 Coming Soon
+###  Coming Soon
 AI experiments & applications
 
 `AI`
@@ -117,7 +117,7 @@ AI experiments & applications
 </td>
 <td width="50%" valign="top">
 
-### 🛡️ Coming Soon
+###  Coming Soon
 Offensive security / CTF write-ups
 
 `Security`
@@ -130,25 +130,25 @@ Offensive security / CTF write-ups
 
 <br/>
 
-## 📁 Project Categories
+##  Project Categories
 
 <table>
 <tr>
 <td width="33%" valign="top" align="center">
 
-### 🐍 Python
+###  Python
 Programs, automation scripts, and tools built while strengthening core programming fundamentals.
 
 </td>
 <td width="33%" valign="top" align="center">
 
-### 🤖 AI
+###  AI
 Projects involving LLMs, RAG pipelines, AI-assisted apps, and experimentation.
 
 </td>
 <td width="33%" valign="top" align="center">
 
-### 🛡️ Cybersecurity
+###  Cybersecurity
 Labs, write-ups, and tooling built while learning offensive & defensive security — from HTB/THM boxes to custom scripts.
 
 </td>
@@ -157,7 +157,7 @@ Labs, write-ups, and tooling built while learning offensive & defensive security
 
 <br/>
 
-## 📊 Current Progress
+##  Current Progress
 
 ```text
 Python           ████████░░  80%
@@ -171,13 +171,13 @@ Projects Shipped  ███░░░░░░░  30%
 
 <br/>
 
-## 🗺️ Roadmap
+##  Roadmap
 
 <table>
 <tr>
 <td valign="top" width="50%">
 
-**✅ Done**
+** Done**
 - [x] Start BS Cybersecurity @ UET Lahore
 - [x] Learn Python fundamentals
 - [x] Start building real projects
@@ -188,7 +188,7 @@ Projects Shipped  ███░░░░░░░  30%
 </td>
 <td valign="top" width="50%">
 
-**🔜 In Progress / Next**
+** In Progress / Next**
 - [ ] Build more substantial Python projects
 - [ ] Go deeper on networking fundamentals
 - [ ] Strengthen Linux internals knowledge
@@ -212,22 +212,22 @@ Python  →  CS Fundamentals  →  Networking + Linux Internals
 
 <br/>
 
-## 🤝 AI-Assisted Learning
+##  AI-Assisted Learning
 
 AI is part of how I learn — not a replacement for learning.
 
 I use it to:
-- 🧩 Understand unfamiliar concepts, fast
-- 🐛 Debug and troubleshoot broken code
-- ⚖️ Compare different approaches before committing to one
-- 💡 Brainstorm project ideas
-- 🧵 Get unstuck without losing the thread of *why* something works
+-  Understand unfamiliar concepts, fast
+-  Debug and troubleshoot broken code
+-  Compare different approaches before committing to one
+-  Brainstorm project ideas
+-  Get unstuck without losing the thread of *why* something works
 
 > The goal isn't to generate code. The goal is to understand it.
 
 <br/>
 
-## 📈 GitHub Stats
+##  GitHub Stats
 
 <div align="center">
 
@@ -246,7 +246,7 @@ I use it to:
 
 <br/>
 
-## 💭 Why `scriptkiddiee0`?
+##  Why `scriptkiddiee0`?
 
 The name's a little self-aware on purpose.
 
@@ -258,7 +258,7 @@ There's a real difference between running someone else's tool and understanding 
 
 <div align="center">
 
-### 🌟 Follow the journey
+###  Follow the journey
 
 Interested in cybersecurity, Python, or watching someone build skills from zero? You're welcome here.
 
@@ -266,10 +266,12 @@ Interested in cybersecurity, Python, or watching someone build skills from zero?
 
 *Still learning. Still building. Still breaking things — on purpose, this time.*
 
-If something here is useful, a star helps more than you'd think. ⭐
+If something here is useful, a star helps more than you'd think. 
 
 <br/>
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=100&section=footer" width="100%"/>
+```
+[ EOF ] — connection closed by scriptkiddiee0 
+```
 
 </div>
