@@ -29,176 +29,396 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-# ── Custom CSS ────────────────────────────────────────────────────────────────
+# ── Design tokens ──────────────────────────────────────────────────────────
+# Palette built for a clinical, trustworthy tone with real contrast (WCAG AA+):
+#   Canvas   #0B1220  — base background
+#   Surface  #121B2E  — cards, chat bubbles
+#   Surface+ #182338  — elevated / hover surfaces
+#   Line     #263248  — borders / hairlines
+#   Ink      #EAF0F8  — primary text (on Canvas/Surface: ~13:1 contrast)
+#   Ink-dim  #AAB8CC  — secondary text (~6.5:1 contrast)
+#   Ink-mute #7C8AA0  — tertiary / meta text (~4.6:1 contrast, still AA)
+#   Teal     #35D6C0  — clinical accent (bot, links, focus)
+#   Amber    #F0B429  — warm accent (user, warnings)
 st.markdown(
     """
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&family=Inter:wght@400;500;600;700&display=swap');
 
-    html, body, [data-testid="stAppViewContainer"] {
-        background-color: #0d0f14;
-        color: #d4cfc7;
+    :root {
+        --canvas: #0B1220;
+        --surface: #121B2E;
+        --surface-hi: #182338;
+        --line: #263248;
+        --ink: #EAF0F8;
+        --ink-dim: #AAB8CC;
+        --ink-mute: #7C8AA0;
+        --teal: #35D6C0;
+        --teal-dim: #1B4A44;
+        --amber: #F0B429;
+        --amber-dim: #4A3A15;
+
+        /* Fallback sidebar width, used until JS measures the real value.
+           This matches Streamlit's default expanded sidebar width, so the
+           very first paint already reserves the right amount of space and
+           the input bar never has to "snap" into place. */
+        --sidebar-w: 21rem;
+    }
+
+    html, body, [data-testid="stAppViewContainer"], .stApp {
+        background-color: var(--canvas) !important;
+        color: var(--ink) !important;
         font-family: 'Inter', sans-serif;
     }
 
-    [data-testid="stHeader"] { background-color: #0d0f14; }
+    [data-testid="stHeader"] { background-color: var(--canvas) !important; }
 
-    h1 {
-        font-family: 'DM Serif Display', serif;
-        color: #e8e2d9 !important;
-        letter-spacing: 0.02em;
+    /* Make every default text element inherit a legible color instead of
+       falling back to Streamlit's own (too-dark-on-dark) defaults. */
+    p, span, li, label, div[data-testid="stMarkdownContainer"] {
+        color: var(--ink) !important;
     }
 
+    h1, h2, h3 {
+        font-family: 'Source Serif 4', serif;
+        color: var(--ink) !important;
+        letter-spacing: 0.01em;
+    }
+
+    /* ── Chat bubbles ──────────────────────────────────────────────────── */
     [data-testid="stChatMessage"] {
-        background: #13161d;
-        border: 1px solid #1e2330;
-        border-radius: 10px;
-        padding: 18px 22px;
-        margin-bottom: 14px;
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 20px 24px;
+        margin-bottom: 16px;
     }
+    [data-testid="stChatMessage"] p {
+        color: var(--ink) !important;
+        font-size: 0.98rem;
+        line-height: 1.65;
+    }
+    [data-testid="stChatMessage"] strong { color: var(--ink) !important; }
 
     [data-testid="stChatMessageAvatarUser"],
     [data-testid="stChatMessageAvatarAssistant"] { display: none !important; }
 
-    .custom-input-row {
+    /* ── Fixed input bar ───────────────────────────────────────────────── *
+     * `left` tracks the `--sidebar-w` CSS variable instead of a value set
+     * directly on this element. That distinction matters: Streamlit
+     * recreates this container's DOM node on every rerun, so any inline
+     * style JS applied straight to it is lost the instant it reruns, which
+     * is what let the bar render at `left: 0` (spilling under/over the
+     * open sidebar) right after a rerun, before the old sync script caught
+     * up. A CSS variable set on <html> below survives reruns because the
+     * root element itself is never recreated — every new instance of this
+     * bar inherits the correct offset immediately, with no flash and no
+     * dependence on re-querying this specific node in time.
+     */
+    .st-key-custom_input_row {
         position: fixed;
         bottom: 0;
-        left: 0;
+        left: var(--sidebar-w);
         right: 0;
+        width: auto;
+        box-sizing: border-box;
         z-index: 999;
-        background: #0d0f14;
-        padding: 14px 2rem 18px 2rem;
+        background: linear-gradient(180deg, rgba(11,18,32,0) 0%, var(--canvas) 35%);
+        padding: 22px 2rem 20px 2rem;
+        transition: left 0.22s ease;
     }
-    .custom-input-row .stTextInput input {
-        background: #13161d !important;
-        color: #d4cfc7 !important;
-        border: 1px solid #2a3040 !important;
-        border-radius: 14px 0 0 14px !important;
+    .st-key-custom_input_row .stTextInput input {
+        background: var(--surface) !important;
+        color: var(--ink) !important;
+        border: 1px solid var(--line) !important;
+        border-radius: 12px 0 0 12px !important;
         padding: 12px 18px !important;
         font-family: 'Inter', sans-serif !important;
-        font-size: 0.92rem !important;
+        font-size: 0.95rem !important;
         box-shadow: none !important;
         outline: none !important;
         height: 52px !important;
     }
-    .custom-input-row .stTextInput input:focus {
-        border-color: #4a9eff !important;
-        box-shadow: 0 0 0 3px rgba(74,158,255,0.12) !important;
+    .st-key-custom_input_row .stTextInput input:focus {
+        border-color: var(--teal) !important;
+        box-shadow: 0 0 0 3px rgba(53,214,192,0.18) !important;
     }
-    .custom-input-row .stTextInput input::placeholder {
-        color: #3a4055 !important;
+    .st-key-custom_input_row .stTextInput input::placeholder {
+        color: var(--ink-mute) !important;
     }
-    .custom-input-row .send-btn .stButton > button {
-        background: #1a2a3a !important;
-        color: #4a9eff !important;
-        border: 1px solid #2a3040 !important;
+    .st-key-custom_input_row .send-btn .stButton > button {
+        background: var(--teal-dim) !important;
+        color: var(--teal) !important;
+        border: 1px solid var(--line) !important;
         border-left: none !important;
-        border-radius: 0 14px 14px 0 !important;
+        border-radius: 0 12px 12px 0 !important;
         height: 52px !important;
-        padding: 0 18px !important;
-        font-size: 1.1rem !important;
-        font-weight: 600 !important;
+        padding: 0 20px !important;
+        font-size: 1.15rem !important;
+        font-weight: 700 !important;
         transition: background 0.18s ease !important;
     }
-    .custom-input-row .send-btn .stButton > button:hover {
-        background: #1e3a50 !important;
-        color: #6ab4ff !important;
+    .st-key-custom_input_row .send-btn .stButton > button:hover {
+        background: #235e56 !important;
+        color: #7ff0e0 !important;
     }
-    .custom-input-row .mic-btn .stButton > button {
-        background: #13161d !important;
-        color: #3a5070 !important;
-        border: 1px solid #2a3040 !important;
+    .st-key-custom_input_row .mic-btn .stButton > button,
+    .st-key-custom_input_row .mic-btn-active .stButton > button {
+        background: var(--surface) !important;
+        color: var(--ink-dim) !important;
+        border: 1px solid var(--line) !important;
         border-left: none !important;
         border-radius: 0 !important;
         height: 52px !important;
-        padding: 0 14px !important;
-        font-size: 1rem !important;
+        padding: 0 16px !important;
+        font-size: 1.05rem !important;
         transition: all 0.18s ease !important;
     }
-    .custom-input-row .mic-btn .stButton > button:hover {
-        color: #4a9eff !important;
-        background: #161b26 !important;
-    }
-    .custom-input-row .mic-btn-active .stButton > button {
-        color: #4a9eff !important;
-        background: #0f1a28 !important;
-    }
-    .block-container {
-        padding-bottom: 90px !important;
-    }
-
-    [data-testid="stSidebar"] {
-        background-color: #0f1118;
-        border-right: 1px solid #1a1e2a;
-    }
-
-    ::-webkit-scrollbar { width: 4px; }
-    ::-webkit-scrollbar-track { background: #0d0f14; }
-    ::-webkit-scrollbar-thumb { background: #222536; border-radius: 4px; }
-
-    .stButton > button {
-        background-color: #13161d;
-        color: #7a9abb;
-        border: 1px solid #1e2a38;
-        border-radius: 6px;
-        font-size: 0.78rem;
-        padding: 7px 14px;
-        font-family: 'Inter', sans-serif;
-        font-weight: 500;
-        letter-spacing: 0.02em;
-        transition: all 0.18s ease;
-    }
-    .stButton > button:hover {
-        background-color: #161b26;
-        border-color: #2e4a6a;
-        color: #b0c8e0;
-    }
-
-    [data-testid="metric-container"] {
-        background: #13161d;
-        border: 1px solid #1e2330;
-        border-radius: 8px;
-        padding: 10px;
-    }
-
-    [data-testid="stFileUploader"] {
-        background: #13161d;
-        border: 1px dashed #1e2a38;
-        border-radius: 8px;
-        padding: 12px;
-    }
-
-    [data-testid="stAlert"] {
-        background: #111520 !important;
-        border: 1px solid #1e2a38 !important;
-        border-radius: 8px !important;
-        color: #7a9abb !important;
+    .st-key-custom_input_row .mic-btn-active .stButton > button {
+        color: var(--teal) !important;
+        background: var(--teal-dim) !important;
+        border-color: var(--teal) !important;
     }
 
     .block-container {
         padding-top: 2.5rem !important;
-        padding-bottom: 3rem !important;
+        padding-bottom: 100px !important;
+    }
+
+    /* ── Sidebar ───────────────────────────────────────────────────────── */
+    [data-testid="stSidebar"] {
+        background-color: #0E1526 !important;
+        border-right: 1px solid var(--line);
+    }
+    [data-testid="stSidebar"] * {
+        color: var(--ink-dim) !important;
+    }
+    [data-testid="stSidebar"] h1, [data-testid="stSidebar"] h2, [data-testid="stSidebar"] h3 {
+        color: var(--ink) !important;
+    }
+    [data-testid="stSidebar"] .stCaption, [data-testid="stSidebar"] small {
+        color: var(--ink-mute) !important;
+    }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--canvas); }
+    ::-webkit-scrollbar-thumb { background: var(--line); border-radius: 4px; }
+
+    /* ── Buttons (general) ────────────────────────────────────────────── */
+    .stButton > button {
+        background-color: var(--surface);
+        color: var(--ink) !important;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        font-size: 0.85rem;
+        padding: 9px 16px;
+        font-family: 'Inter', sans-serif;
+        font-weight: 600;
+        transition: all 0.18s ease;
+    }
+    .stButton > button:hover {
+        background-color: var(--surface-hi);
+        border-color: var(--teal);
+        color: var(--teal) !important;
+    }
+    .stButton > button p { color: inherit !important; }
+
+    /* ── Metrics ───────────────────────────────────────────────────────── */
+    [data-testid="stMetric"] {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        padding: 12px;
+    }
+    [data-testid="stMetricValue"] { color: var(--ink) !important; font-size: 1.6rem; }
+    [data-testid="stMetricLabel"] { color: var(--ink-mute) !important; }
+
+    /* ── File uploader ─────────────────────────────────────────────────── */
+    [data-testid="stFileUploader"] {
+        background: var(--surface);
+        border: 1.5px dashed var(--line);
+        border-radius: 10px;
+        padding: 14px;
+    }
+    [data-testid="stFileUploaderDropzone"] {
+        background: var(--surface) !important;
+    }
+    [data-testid="stFileUploaderDropzoneInstructions"] span,
+    [data-testid="stFileUploaderDropzoneInstructions"] small {
+        color: var(--ink-dim) !important;
+    }
+    [data-testid="stBaseButton-secondary"] {
+        background: var(--surface-hi) !important;
+        color: var(--ink) !important;
+        border: 1px solid var(--line) !important;
+    }
+
+    /* ── Alerts (info/success/warning) ────────────────────────────────── */
+    [data-testid="stAlertContentInfo"] { color: var(--ink) !important; }
+    [data-testid="stAlertContentSuccess"] { color: var(--ink) !important; }
+    [data-testid="stAlert"] {
+        background: var(--surface) !important;
+        border: 1px solid var(--line) !important;
+        border-radius: 10px !important;
+    }
+    [data-testid="stAlert"] p { color: var(--ink) !important; }
+
+    /* ── Checkbox label ────────────────────────────────────────────────── */
+    [data-testid="stCheckbox"] label p { color: var(--ink-dim) !important; }
+
+    /* ── Header eyebrow / suggestion cards ────────────────────────────── */
+    .section-label {
+        font-size: 0.75rem;
+        color: var(--teal);
+        letter-spacing: 0.06em;
+        margin-bottom: 14px;
+        font-family: 'Inter', sans-serif;
+        font-weight: 600;
+    }
+
+    /* Force the suggestion-card row to stretch every column to the same
+       height (the tallest one), then let each card grow to fill its
+       column's leftover space. This replaces the old fixed `min-height`,
+       which broke as soon as one question wrapped to a second line. */
+    div[data-testid="stHorizontalBlock"]:has(.suggestion-card) {
+        align-items: stretch;
+    }
+    div[data-testid="stHorizontalBlock"]:has(.suggestion-card) > div[data-testid="column"] {
+        display: flex;
+    }
+    div[data-testid="stHorizontalBlock"]:has(.suggestion-card) > div[data-testid="column"] > div {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+    div[data-testid="stHorizontalBlock"]:has(.suggestion-card) [data-testid="stVerticalBlock"] {
+        height: 100%;
+    }
+    .suggestion-card {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        padding: 18px 16px;
+        flex: 1 1 auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        margin-bottom: 10px;
+        transition: border-color 0.18s ease, background 0.18s ease;
+    }
+    .suggestion-card .cat {
+        font-size: 0.7rem;
+        color: var(--teal);
+        font-weight: 700;
+        margin-bottom: 6px;
+    }
+    .suggestion-card .q {
+        font-size: 0.86rem;
+        color: var(--ink-dim);
+        line-height: 1.4;
+    }
+
+    /* ── Conversation anchor ──────────────────────────────────────────── *
+     * Real chat apps (Claude, ChatGPT) keep a short conversation pinned
+     * just above the composer instead of floating at the top of the page.
+     * `justify-content: flex-end` inside a viewport-relative min-height
+     * box does exactly that: messages stack from the bottom up, and once
+     * they exceed the box's height, normal top-down flow / scrolling
+     * takes over automatically.
+     */
+    .st-key-chat_messages_anchor {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        min-height: calc(100vh - 180px);
     }
     </style>
     """,
     unsafe_allow_html=True,
 )
 
+# ── Sidebar-aware positioning for the fixed input bar ───────────────────────
+# Instead of writing the measured width directly onto the input bar element
+# (`.st-key-custom_input_row`), this sets a CSS variable, `--sidebar-w`, on
+# <html>. That's the key fix: Streamlit tears down and recreates the input
+# bar's DOM node on every rerun, so inline styles applied straight to it
+# only last until the next rerun — there's a window where the freshly
+# recreated node has no inline style yet and falls back to `left: 0`,
+# which is exactly what let it render underneath/over an open sidebar.
+# <html> is never recreated, so the variable — and therefore the correct
+# offset — survives every rerun automatically, with no re-sync needed.
+st.markdown(
+    """
+    <script>
+    (function () {
+        if (window.__carebotInputSyncInit) { return; }
+        window.__carebotInputSyncInit = true;
+
+        const root = document.documentElement;
+
+        function syncInputBar() {
+            const sidebar = document.querySelector('[data-testid="stSidebar"]');
+            if (!sidebar) {
+                root.style.setProperty('--sidebar-w', '0px');
+                return;
+            }
+            const expanded = sidebar.getAttribute('aria-expanded') !== 'false';
+            if (!expanded) {
+                root.style.setProperty('--sidebar-w', '0px');
+                return;
+            }
+            const width = sidebar.getBoundingClientRect().width;
+            // Guard against transient 0-width reads (e.g. mid-layout, before
+            // fonts/content settle) so we never overwrite a good value with
+            // a bad one and cause the bar to jump under the sidebar.
+            if (width > 0) {
+                root.style.setProperty('--sidebar-w', width + 'px');
+            }
+        }
+
+        syncInputBar();
+        window.addEventListener('resize', syncInputBar);
+
+        const attachObservers = () => {
+            const sidebar = document.querySelector('[data-testid="stSidebar"]');
+            if (sidebar && !sidebar.__carebotObserved) {
+                sidebar.__carebotObserved = true;
+                new ResizeObserver(syncInputBar).observe(sidebar);
+                new MutationObserver(syncInputBar).observe(sidebar, {
+                    attributes: true,
+                    attributeFilter: ['aria-expanded', 'style'],
+                });
+            }
+        };
+        attachObservers();
+
+        // Streamlit swaps DOM nodes on rerun; keep re-checking so the sync
+        // survives reruns instead of silently going stale.
+        new MutationObserver(() => {
+            attachObservers();
+            syncInputBar();
+        }).observe(document.body, { childList: true, subtree: true });
+    })();
+    </script>
+    """,
+    unsafe_allow_html=True,
+)
+
 USER_AVATAR_HTML = """
-<div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
-    <div style="width:28px;height:28px;border-radius:50%;background:#161b26;
-        border:1px solid #2a3040;display:flex;align-items:center;justify-content:center;
-        font-size:12px;flex-shrink:0;box-shadow:0 0 8px rgba(100,120,200,0.18);">👤</div>
-    <span style="font-size:0.7rem;color:#4a5570;letter-spacing:0.1em;text-transform:uppercase;font-family:'Inter',sans-serif;font-weight:600;">You</span>
+<div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+    <div style="width:26px;height:26px;border-radius:50%;background:#4A3A15;
+        border:1px solid #6b4f1c;display:flex;align-items:center;justify-content:center;
+        font-size:13px;flex-shrink:0;color:#F0B429;font-weight:700;">Y</div>
+    <span style="font-size:0.72rem;color:#F0B429;letter-spacing:0.04em;font-family:'Inter',sans-serif;font-weight:600;">You</span>
 </div>
 """
 
 BOT_AVATAR_HTML = """
-<div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
-    <div style="width:28px;height:28px;border-radius:50%;background:#0f1a28;
-        border:1px solid #2a4060;display:flex;align-items:center;justify-content:center;
-        font-size:12px;flex-shrink:0;box-shadow:0 0 10px rgba(40,100,180,0.25);">+</div>
-    <span style="font-size:0.7rem;color:#2e5070;letter-spacing:0.1em;text-transform:uppercase;font-family:'Inter',sans-serif;font-weight:600;">CareBot</span>
+<div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+    <div style="width:26px;height:26px;border-radius:50%;background:#1B4A44;
+        border:1px solid #2b6a61;display:flex;align-items:center;justify-content:center;
+        font-size:13px;flex-shrink:0;color:#35D6C0;font-weight:700;">+</div>
+    <span style="font-size:0.72rem;color:#35D6C0;letter-spacing:0.04em;font-family:'Inter',sans-serif;font-weight:600;">CareBot</span>
 </div>
 """
 
@@ -355,52 +575,53 @@ def _submit_input():
     val = st.session_state.get("chat_text_input", "").strip()
     if val:
         st.session_state.pending_prompt = val
-    # clear the widget immediately via its own key (safe inside a callback)
     st.session_state["chat_text_input"] = ""
 
 
 def main():
-    # ── Session state init ────────────────────────────────────────────────────
     for key, default in [
         ("messages", []),
         ("suggested_prompt", None),
         ("total_questions", 0),
         ("show_voice", False),
-        ("pending_prompt", None),   # ← holds the submitted text between reruns
+        ("pending_prompt", None),
+        ("awaiting_answer", False),
+        ("awaiting_prompt", None),
     ]:
         if key not in st.session_state:
             st.session_state[key] = default
 
-    # ── Sidebar ───────────────────────────────────────────────────────────────
+    # ── Sidebar ───────────────────────────────────────────────────────────
     with st.sidebar:
         st.markdown(
             """
             <div style="padding: 20px 4px 12px 4px;">
-                <div style="font-family:'DM Serif Display',serif;font-size:1.35rem;color:#c8c2b8;
-                    letter-spacing:0.04em;">CareBot</div>
-                <div style="height:1px;background:#1a1e2a;margin-top:10px;"></div>
+                <div style="font-family:'Source Serif 4',serif;font-size:1.4rem;color:#EAF0F8;
+                    letter-spacing:0.01em;">CareBot</div>
+                <div style="height:1px;background:#263248;margin-top:10px;"></div>
             </div>
             """,
             unsafe_allow_html=True,
         )
 
-        if st.button("New Chat", use_container_width=True, key="new_chat_btn"):
+        if st.button("New chat", use_container_width=True, key="new_chat_btn"):
             st.session_state.messages = []
             st.session_state.total_questions = 0
             st.session_state.pending_prompt = None
+            st.session_state.awaiting_answer = False
+            st.session_state.awaiting_prompt = None
             st.rerun()
 
-        st.markdown("<div style='height:8px'></div>", unsafe_allow_html=True)
+        st.markdown("<div style='height:20px'></div>", unsafe_allow_html=True)
 
         st.markdown(
             """
-            <div style="font-size:0.7rem;color:#3a4055;letter-spacing:0.1em;
-                text-transform:uppercase;margin-top:16px;margin-bottom:8px;
-                font-family:'Inter',sans-serif;font-weight:600;">Upload Report</div>
+            <div style="font-size:0.72rem;color:#7C8AA0;letter-spacing:0.04em;
+                margin-bottom:6px;font-family:'Inter',sans-serif;font-weight:600;">UPLOAD REPORT</div>
             """,
             unsafe_allow_html=True,
         )
-        st.caption("PDF or TXT files — your documents stay private")
+        st.caption("PDF or TXT files — your documents stay private.")
 
         uploaded_files = st.file_uploader(
             "Choose files", type=["pdf", "txt"],
@@ -437,7 +658,7 @@ def main():
 
         st.markdown("<div style='height:24px'></div>", unsafe_allow_html=True)
         st.markdown(
-            "<div style='height:1px;background:#1a1e2a;margin-bottom:12px;'></div>",
+            "<div style='height:1px;background:#263248;margin-bottom:16px;'></div>",
             unsafe_allow_html=True,
         )
 
@@ -446,7 +667,7 @@ def main():
         col_b.metric("Messages", len(st.session_state.messages))
 
         if st.session_state.messages:
-            st.markdown("<div style='height:8px'></div>", unsafe_allow_html=True)
+            st.markdown("<div style='height:12px'></div>", unsafe_allow_html=True)
             chat_data = {
                 "exported_at": datetime.now().isoformat(),
                 "total_questions": st.session_state.total_questions,
@@ -461,36 +682,25 @@ def main():
                 key="download_btn",
             )
 
-        st.markdown("<div style='height:24px'></div>", unsafe_allow_html=True)
+        st.markdown("<div style='height:28px'></div>", unsafe_allow_html=True)
         st.markdown(
             """
-            <div style="height:1px;background:#1a1e2a;margin-bottom:16px;"></div>
-            <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:16px;">
+            <div style="height:1px;background:#263248;margin-bottom:18px;"></div>
+            <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:18px;">
                 <div style="display:flex;align-items:center;gap:9px;">
-                    <div style="width:15px;height:15px;border:1.5px solid #2a4a2a;border-radius:50%;
-                        display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-                        <div style="width:6px;height:4px;border-left:1.5px solid #3a7a3a;
-                            border-bottom:1.5px solid #3a7a3a;transform:rotate(-45deg);margin-top:-1px;"></div>
-                    </div>
-                    <span style="font-size:0.74rem;color:#3a5040;font-family:'Inter',sans-serif;">Evidence-based information</span>
+                    <span style="color:#35D6C0;font-size:0.9rem;">✓</span>
+                    <span style="font-size:0.78rem;color:#AAB8CC;font-family:'Inter',sans-serif;">Evidence-based information</span>
                 </div>
                 <div style="display:flex;align-items:center;gap:9px;">
-                    <div style="width:15px;height:15px;border:1.5px solid #2a4a2a;border-radius:50%;
-                        display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-                        <div style="width:6px;height:4px;border-left:1.5px solid #3a7a3a;
-                            border-bottom:1.5px solid #3a7a3a;transform:rotate(-45deg);margin-top:-1px;"></div>
-                    </div>
-                    <span style="font-size:0.74rem;color:#3a5040;font-family:'Inter',sans-serif;">Private document analysis</span>
+                    <span style="color:#35D6C0;font-size:0.9rem;">✓</span>
+                    <span style="font-size:0.78rem;color:#AAB8CC;font-family:'Inter',sans-serif;">Private document analysis</span>
                 </div>
                 <div style="display:flex;align-items:center;gap:9px;">
-                    <div style="width:15px;height:15px;border:1.5px solid #2a3a4a;border-radius:50%;
-                        display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-                        <div style="width:5px;height:5px;border:1.5px solid #3a5a7a;border-radius:50%;"></div>
-                    </div>
-                    <span style="font-size:0.74rem;color:#2e3d4a;font-family:'Inter',sans-serif;">Not a replacement for professional care</span>
+                    <span style="color:#F0B429;font-size:0.9rem;">!</span>
+                    <span style="font-size:0.78rem;color:#AAB8CC;font-family:'Inter',sans-serif;">Not a replacement for professional care</span>
                 </div>
             </div>
-            <div style="font-size:0.65rem;color:#222630;line-height:1.6;font-family:'Inter',sans-serif;padding:0 2px;">
+            <div style="font-size:0.7rem;color:#7C8AA0;line-height:1.6;font-family:'Inter',sans-serif;padding:0 2px;">
                 For informational use only. Not a substitute for professional medical advice.
             </div>
             """,
@@ -499,42 +709,41 @@ def main():
 
     has_messages = bool(st.session_state.messages)
 
-    # ── Main area header — only shown on empty chat ───────────────────────────
+    # ── Main header ───────────────────────────────────────────────────────
     if not has_messages:
         st.markdown(
             """
             <div style="display:flex;align-items:center;gap:22px;margin-bottom:4px;margin-top:8px;">
                 <div style="flex-shrink:0;">
-                    <svg width="72" height="72" viewBox="0 0 72 72" fill="none">
-                        <line x1="36" y1="6" x2="36" y2="16" stroke="#3a6090" stroke-width="2.5" stroke-linecap="round"/>
-                        <circle cx="36" cy="4.5" r="3" fill="#4a80b0" opacity="0.9"/>
-                        <rect x="16" y="16" width="40" height="30" rx="9" fill="#13161d" stroke="#2a4060" stroke-width="1.8"/>
-                        <rect x="22" y="24" width="10" height="7" rx="3" fill="#1a3a5c"/>
-                        <rect x="40" y="24" width="10" height="7" rx="3" fill="#1a3a5c"/>
-                        <circle cx="27" cy="27.5" r="2.5" fill="#4a9eff" opacity="0.95"/>
-                        <circle cx="45" cy="27.5" r="2.5" fill="#4a9eff" opacity="0.95"/>
-                        <rect x="25" y="36" width="22" height="5" rx="2.5" fill="#1a3a5c"/>
-                        <rect x="27" y="37.5" width="4" height="2" rx="1" fill="#4a9eff" opacity="0.8"/>
-                        <rect x="33" y="37.5" width="4" height="2" rx="1" fill="#4a9eff" opacity="0.8"/>
-                        <rect x="39" y="37.5" width="4" height="2" rx="1" fill="#4a9eff" opacity="0.8"/>
-                        <rect x="8" y="22" width="8" height="14" rx="4" fill="#13161d" stroke="#2a4060" stroke-width="1.5"/>
-                        <rect x="56" y="22" width="8" height="14" rx="4" fill="#13161d" stroke="#2a4060" stroke-width="1.5"/>
-                        <rect x="20" y="48" width="32" height="18" rx="6" fill="#13161d" stroke="#2a4060" stroke-width="1.8"/>
-                        <rect x="33" y="52" width="6" height="10" rx="1.5" fill="#2a5080" opacity="0.9"/>
-                        <rect x="30" y="55" width="12" height="4" rx="1.5" fill="#2a5080" opacity="0.9"/>
-                        <rect x="22" y="66" width="10" height="5" rx="2.5" fill="#13161d" stroke="#2a4060" stroke-width="1.5"/>
-                        <rect x="40" y="66" width="10" height="5" rx="2.5" fill="#13161d" stroke="#2a4060" stroke-width="1.5"/>
+                    <svg width="64" height="64" viewBox="0 0 72 72" fill="none">
+                        <line x1="36" y1="6" x2="36" y2="16" stroke="#35D6C0" stroke-width="2.5" stroke-linecap="round"/>
+                        <circle cx="36" cy="4.5" r="3" fill="#35D6C0"/>
+                        <rect x="16" y="16" width="40" height="30" rx="9" fill="#121B2E" stroke="#35D6C0" stroke-width="1.8"/>
+                        <rect x="22" y="24" width="10" height="7" rx="3" fill="#1B4A44"/>
+                        <rect x="40" y="24" width="10" height="7" rx="3" fill="#1B4A44"/>
+                        <circle cx="27" cy="27.5" r="2.5" fill="#35D6C0"/>
+                        <circle cx="45" cy="27.5" r="2.5" fill="#35D6C0"/>
+                        <rect x="25" y="36" width="22" height="5" rx="2.5" fill="#1B4A44"/>
+                        <rect x="27" y="37.5" width="4" height="2" rx="1" fill="#35D6C0"/>
+                        <rect x="33" y="37.5" width="4" height="2" rx="1" fill="#35D6C0"/>
+                        <rect x="39" y="37.5" width="4" height="2" rx="1" fill="#35D6C0"/>
+                        <rect x="8" y="22" width="8" height="14" rx="4" fill="#121B2E" stroke="#35D6C0" stroke-width="1.5"/>
+                        <rect x="56" y="22" width="8" height="14" rx="4" fill="#121B2E" stroke="#35D6C0" stroke-width="1.5"/>
+                        <rect x="20" y="48" width="32" height="18" rx="6" fill="#121B2E" stroke="#35D6C0" stroke-width="1.8"/>
+                        <rect x="33" y="52" width="6" height="10" rx="1.5" fill="#35D6C0"/>
+                        <rect x="30" y="55" width="12" height="4" rx="1.5" fill="#35D6C0"/>
+                        <rect x="22" y="66" width="10" height="5" rx="2.5" fill="#121B2E" stroke="#35D6C0" stroke-width="1.5"/>
+                        <rect x="40" y="66" width="10" height="5" rx="2.5" fill="#121B2E" stroke="#35D6C0" stroke-width="1.5"/>
                     </svg>
                 </div>
                 <div>
-                    <div style="font-family:'DM Serif Display',serif;font-size:2.6rem;line-height:1.1;
-                        color:#e8e2d9;letter-spacing:0.04em;">ASK CAREBOT</div>
-                    <div style="font-family:'DM Mono',monospace;font-size:0.78rem;color:#3a6090;
-                        letter-spacing:0.18em;text-transform:uppercase;margin-top:5px;">
-                        YOUR PERSONAL AI HEALTH ASSISTANT</div>
+                    <div style="font-family:'Source Serif 4',serif;font-size:2.4rem;line-height:1.1;
+                        color:#EAF0F8;">Ask CareBot</div>
+                    <div style="font-family:'Inter',sans-serif;font-size:0.85rem;color:#7C8AA0;
+                        margin-top:6px;">Your personal AI health assistant</div>
                 </div>
             </div>
-            <div style="height:1px;background:linear-gradient(90deg,#2a4060 0%,transparent 80%);margin-bottom:28px;"></div>
+            <div style="height:1px;background:linear-gradient(90deg,#263248 0%,transparent 85%);margin-bottom:30px;"></div>
             """,
             unsafe_allow_html=True,
         )
@@ -544,38 +753,18 @@ def main():
     elif temp_vectorstore:
         st.info("Searching both uploaded documents and base knowledge.")
 
-    # ── Quick Suggestion Cards — only on empty chat ───────────────────────────
+    # ── Quick Suggestion Cards ────────────────────────────────────────────
     if not has_messages:
-        st.markdown(
-            "<div style='font-size:0.7rem;color:#4a9eff;text-shadow:0 0 8px rgba(74,158,255,0.5);letter-spacing:0.1em;text-transform:uppercase;"
-            "margin-bottom:14px;font-family:\"Inter\",sans-serif;font-weight:600;'>Common Questions</div>",
-            unsafe_allow_html=True,
-        )
+        st.markdown("<div class='section-label'>Common questions</div>", unsafe_allow_html=True)
 
         cols = st.columns(4)
-        card_css = """
-            background:#111520;
-            border:1px solid #1a2030;
-            border-radius:16px;
-            padding:20px 16px;
-            cursor:pointer;
-            transition:border-color 0.18s ease, background 0.18s ease;
-            min-height:90px;
-            display:flex;
-            flex-direction:column;
-            justify-content:flex-end;
-        """
-
         for i, (label, question) in enumerate(QUICK_SUGGESTIONS):
             with cols[i]:
                 st.markdown(
                     f"""
-                    <div style="{card_css}">
-                        <div style="font-size:0.68rem;color:#2e3a4a;text-transform:uppercase;
-                            letter-spacing:0.1em;font-family:'Inter',sans-serif;font-weight:600;
-                            margin-bottom:6px;">{label}</div>
-                        <div style="font-size:0.82rem;color:#7a8a9a;font-family:'Inter',sans-serif;
-                            line-height:1.4;">{question}</div>
+                    <div class="suggestion-card">
+                        <div class="cat">{label}</div>
+                        <div class="q">{question}</div>
                     </div>
                     """,
                     unsafe_allow_html=True,
@@ -586,11 +775,32 @@ def main():
 
         st.markdown("<div style='height:32px'></div>", unsafe_allow_html=True)
 
-    # ── Conversation history ──────────────────────────────────────────────────
-    for message in st.session_state.messages:
-        render_message(message["role"], message["content"])
+    # ── Conversation history ──────────────────────────────────────────────
+    # Rendered inside a real container (not just markdown text) so the
+    # `.st-key-chat_messages_anchor` CSS rule above can actually target it
+    # and push a short conversation down to sit right above the composer.
+    chat_anchor = st.container(key="chat_messages_anchor")
+    with chat_anchor:
+        for message in st.session_state.messages:
+            render_message(message["role"], message["content"])
 
-    # Scroll anchor — keeps the latest message above the fixed input bar
+        # If a question was just submitted, show it "thinking" right here in
+        # the history stream (above the input bar) instead of after it.
+        if st.session_state.awaiting_answer:
+            with st.chat_message("assistant"):
+                st.markdown(BOT_AVATAR_HTML, unsafe_allow_html=True)
+                with st.spinner("CareBot is thinking..."):
+                    try:
+                        answer = get_answer(
+                            st.session_state.awaiting_prompt, use_uploaded_files, temp_vectorstore
+                        )
+                    except Exception as e:
+                        answer = f"Something went wrong: {str(e)}"
+            st.session_state.messages.append({"role": "assistant", "content": answer})
+            st.session_state.awaiting_answer = False
+            st.session_state.awaiting_prompt = None
+            st.rerun()
+
     st.markdown('<div id="chat-bottom"></div>', unsafe_allow_html=True)
     st.markdown(
         """
@@ -602,43 +812,42 @@ def main():
         unsafe_allow_html=True,
     )
 
-    # ── Fixed input bar ───────────────────────────────────────────────────────
-    st.markdown('<div class="custom-input-row">', unsafe_allow_html=True)
+    # ── Fixed input bar ───────────────────────────────────────────────────
+    # Using st.container(key=...) instead of a raw st.markdown('<div>') so the
+    # CSS rules above actually scope to real DOM children (fixes both the
+    # positioning and the white input background).
+    input_row = st.container(key="custom_input_row")
+    with input_row:
+        if HAS_SPEECH_RECOGNITION:
+            col_text, col_mic, col_send = st.columns([11, 1, 1])
+        else:
+            col_text, col_send = st.columns([12, 1])
+            col_mic = None
 
-    if HAS_SPEECH_RECOGNITION:
-        col_text, col_mic, col_send = st.columns([11, 1, 1])
-    else:
-        col_text, col_send = st.columns([12, 1])
-        col_mic = None
+        with col_text:
+            st.text_input(
+                "input",
+                label_visibility="collapsed",
+                placeholder="Ask a health question...",
+                key="chat_text_input",
+                on_change=_submit_input,
+            )
 
-    with col_text:
-        # on_change fires BEFORE the rerun, capturing text into pending_prompt
-        st.text_input(
-            "input",
-            label_visibility="collapsed",
-            placeholder="Ask a health question...",
-            key="chat_text_input",
-            on_change=_submit_input,
-        )
+        if col_mic:
+            mic_class = "mic-btn-active" if st.session_state.show_voice else "mic-btn"
+            st.markdown(f'<div class="{mic_class}">', unsafe_allow_html=True)
+            with col_mic:
+                if st.button("🎙", key="mic_toggle"):
+                    st.session_state.show_voice = not st.session_state.show_voice
+            st.markdown('</div>', unsafe_allow_html=True)
 
-    if col_mic:
-        mic_class = "mic-btn-active" if st.session_state.show_voice else "mic-btn"
-        st.markdown(f'<div class="{mic_class}">', unsafe_allow_html=True)
-        with col_mic:
-            if st.button("🎙", key="mic_toggle"):
-                st.session_state.show_voice = not st.session_state.show_voice
+        st.markdown('<div class="send-btn">', unsafe_allow_html=True)
+        with col_send:
+            if st.button("↑", key="send_btn", on_click=_submit_input):
+                pass
         st.markdown('</div>', unsafe_allow_html=True)
 
-    st.markdown('<div class="send-btn">', unsafe_allow_html=True)
-    with col_send:
-        # Send button also calls the same callback to grab whatever is in the field
-        if st.button("↑", key="send_btn", on_click=_submit_input):
-            pass   # logic handled inside _submit_input + pending_prompt below
-    st.markdown('</div>', unsafe_allow_html=True)
-
-    st.markdown('</div>', unsafe_allow_html=True)
-
-    # ── Voice input ───────────────────────────────────────────────────────────
+    # ── Voice input ───────────────────────────────────────────────────────
     if HAS_SPEECH_RECOGNITION and st.session_state.show_voice:
         audio_data = st.audio_input("Speak now", label_visibility="visible")
         if audio_data:
@@ -649,28 +858,21 @@ def main():
                     st.session_state.pending_prompt = voice_prompt
                     st.session_state.show_voice = False
 
-    # ── Resolve the final prompt from all sources ─────────────────────────────
+    # ── Resolve the final prompt ────────────────────────────────────────
     prompt = None
     if st.session_state.pending_prompt:
         prompt = st.session_state.pending_prompt
-        st.session_state.pending_prompt = None   # consume it
+        st.session_state.pending_prompt = None
 
-    # ── Process the prompt ────────────────────────────────────────────────────
+    # ── Process the prompt ──────────────────────────────────────────────
+    # Just record it and rerun — the actual "thinking" + answer rendering
+    # happens above, inside the conversation-history section, so it always
+    # appears above the input bar instead of flashing below it.
     if prompt:
-        # Append user message first so sidebar counters update on this rerun
         st.session_state.messages.append({"role": "User", "content": prompt})
         st.session_state.total_questions += 1
-
-        render_message("User", prompt)
-
-        with st.spinner("CareBot is thinking..."):
-            try:
-                answer = get_answer(prompt, use_uploaded_files, temp_vectorstore)
-            except Exception as e:
-                answer = f"Something went wrong: {str(e)}"
-
-        st.session_state.messages.append({"role": "assistant", "content": answer})
-        render_message("assistant", answer)
+        st.session_state.awaiting_answer = True
+        st.session_state.awaiting_prompt = prompt
         st.rerun()
 
 
